@@ -110,7 +110,7 @@ Our research-backed formula combines:
 ## 📞 Connect With Us
 
 - **Email**: hello@floralock.com
-- **Website**: [Your website URL]
+- **Website**: floralocks.com
 - **Social Media**: Follow us on Instagram, Facebook, and YouTube
 - **Customer Service**: Dedicated support for all your hair care needs
 
