@@ -201,7 +201,10 @@ function App() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-20 p-4 bg-opacity-50 bg-black/30 backdrop-blur-sm transition-all duration-300">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="font-serif text-2xl text-gold">Floralock™</h1>
+          <div className="flex items-center">
+            <img src="/applogo.png" alt="Floralock Logo" className="h-8 w-auto mr-3" />
+            <h1 className="font-serif text-2xl text-gold">Floralock™</h1>
+          </div>
           <div className="flex items-center space-x-6">
             <a href="#shop" className="hidden sm:inline-block bg-gold text-black font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-colors duration-300 text-sm">
               Shop Now
@@ -331,6 +334,152 @@ function App() {
               <p>Bhringraj Extract</p>
               <p>Glycerin</p>
               <p>Vitamin E</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section id="testimonials" className="py-20 bg-black bg-opacity-20 fade-in-section">
+          <div className="container mx-auto px-4">
+            <h2 className="font-serif text-4xl text-gold mb-12 text-center">What Our Customers Say</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Testimonial 1 */}
+              <div className="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-gray-800 transform hover:-translate-y-2 transition-transform duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-gold">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-300 mb-4 italic">"Floralock has completely transformed my hair! After just 2 weeks of use, I noticed significantly less hair fall and my hair feels so much stronger. The natural ingredients make me feel confident about what I'm putting on my hair."</p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center mr-4">
+                    <span className="text-black font-bold text-lg">S</span>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold">Sarah Ahmed</h4>
+                    <p className="text-gray-400 text-sm">Lahore, Pakistan</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial 2 */}
+              <div className="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-gray-800 transform hover:-translate-y-2 transition-transform duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-gold">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-300 mb-4 italic">"I've tried so many shampoos but Floralock is different. My hair has never been this healthy and shiny. The flaxseed formula really works! Plus, knowing it's 100% organic gives me peace of mind."</p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center mr-4">
+                    <span className="text-black font-bold text-lg">M</span>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold">Maria Khan</h4>
+                    <p className="text-gray-400 text-sm">Karachi, Pakistan</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial 3 */}
+              <div className="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-gray-800 transform hover:-translate-y-2 transition-transform duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-gold">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-300 mb-4 italic">"As someone with sensitive scalp, I was skeptical about trying new products. Floralock proved me wrong! It's gentle yet effective. My hair fall has reduced by 70% and my scalp feels so much healthier."</p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center mr-4">
+                    <span className="text-black font-bold text-lg">A</span>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold">Aisha Malik</h4>
+                    <p className="text-gray-400 text-sm">Islamabad, Pakistan</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial 4 */}
+              <div className="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-gray-800 transform hover:-translate-y-2 transition-transform duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-gold">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-300 mb-4 italic">"The natural shine Floralock gives my hair is incredible! My friends keep asking what I'm using. The organic ingredients make all the difference. I've been using it for 3 months now and my hair has never looked better."</p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center mr-4">
+                    <span className="text-black font-bold text-lg">F</span>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold">Fatima Sheikh</h4>
+                    <p className="text-gray-400 text-sm">Rawalpindi, Pakistan</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial 5 */}
+              <div className="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-gray-800 transform hover:-translate-y-2 transition-transform duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-gold">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-300 mb-4 italic">"I love that Floralock is Halal certified and chemical-free. As a mother, I want the best for my family. This shampoo has made my hair stronger and my daughter loves how soft it makes her hair feel."</p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center mr-4">
+                    <span className="text-black font-bold text-lg">N</span>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold">Nadia Hassan</h4>
+                    <p className="text-gray-400 text-sm">Faisalabad, Pakistan</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial 6 */}
+              <div className="bg-gray-900 bg-opacity-50 p-6 rounded-lg border border-gray-800 transform hover:-translate-y-2 transition-transform duration-300">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-gold">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-300 mb-4 italic">"After years of struggling with hair loss, Floralock has been a game-changer. The flaxseed and herbal extracts have strengthened my hair roots significantly. I can finally wear my hair down with confidence!"</p>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-gold rounded-full flex items-center justify-center mr-4">
+                    <span className="text-black font-bold text-lg">Z</span>
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold">Zara Ali</h4>
+                    <p className="text-gray-400 text-sm">Multan, Pakistan</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
