@@ -47,6 +47,9 @@ const CartModal = ({
           <button
             onClick={handleNewOrder}
             className="mt-6 bg-gold text-black font-bold py-2 px-8 rounded-full hover:bg-opacity-90 transition-colors"
+            data-umami-event="Place Order"
+            data-umami-event-total={totalPrice}
+            data-umami-event-items={cartItems.length}
           >
             Place New Order
           </button>

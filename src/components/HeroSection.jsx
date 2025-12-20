@@ -21,7 +21,11 @@ const HeroSection = () => {
           <p className="text-gray-300 mt-4 max-w-md mx-auto md:mx-0 stagger-item">For Strong, Healthy & Natural Locks</p>
 
           <div className="mt-8 stagger-item">
-            <a href="#shop" className="inline-block bg-gold text-black font-bold py-3 px-10 rounded-full btn-enhanced btn-ripple">
+            <a
+              href="#shop"
+              className="inline-block bg-gold text-black font-bold py-3 px-10 rounded-full btn-enhanced btn-ripple"
+              data-umami-event="Shop Now Clicked"
+            >
               Shop Now
             </a>
           </div>

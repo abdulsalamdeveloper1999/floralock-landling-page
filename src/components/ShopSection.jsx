@@ -50,6 +50,8 @@ const ShopSection = ({
             <button
               onClick={handleAddToCart}
               className="w-full bg-gold text-black font-bold py-3 px-10 rounded-full btn-enhanced btn-ripple"
+              data-umami-event="Add to Cart"
+              data-umami-event-quantity={quantity}
             >
               Add to Cart
             </button>
