@@ -1,1 +1,33 @@
 /* Minimal CSS - most styling is now in index.html */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Force autofill background to black and text to white */
+/* Input Autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px black inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s; /* Delay default bg */
+    caret-color: white;
+}
+
+/* Textarea Autofill */
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px black inset !important;
+    -webkit-text-fill-color: white !important;
+    transition: background-color 5000s ease-in-out 0s; /* Delay default bg */
+    caret-color: white;
+}
+
+/* Force text color on focus just in case */
+input:focus, textarea:focus {
+    color: white !important;
+}

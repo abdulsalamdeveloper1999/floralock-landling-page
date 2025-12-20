@@ -7,7 +7,7 @@ const initializeEmailJS = () => {
     console.error('EmailJS Public Key not found in environment variables');
     return false;
   }
-  
+
   emailjs.init(publicKey);
   return true;
 };
@@ -18,21 +18,46 @@ export const sendOrderConfirmation = async (orderData) => {
 
   const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_ORDER;
-  
+
   if (!serviceId || !templateId) {
     console.error('EmailJS Service ID or Template ID not found');
     return false;
   }
 
   try {
+    // Generate Order ID (simple timestamp based)
+    const orderId = `FL-${Date.now().toString().slice(-6)}`;
+
+    // Generate HTML rows for items
+    const orderItemsHtml = orderData.items.map(item => `
+      <tr style="vertical-align: top">
+        <td style="padding: 24px 8px 0 4px; display: inline-block; width: max-content">
+          <img style="height: 64px" height="64px" src="https://drive.google.com/uc?export=view&id=1t8Mx3iW5OdsfgPzPMOzNGYUooUWcwVod" alt="${item.name}" />
+        </td>
+        <td style="padding: 24px 8px 0 8px; width: 100%">
+          <div style="font-family: serif; color: #333;">${item.name}</div>
+          <div style="font-size: 14px; color: #888; padding-top: 4px">QTY: ${item.quantity}</div>
+        </td>
+        <td style="padding: 24px 4px 0 0; white-space: nowrap">
+          <strong>PKR ${(item.price * item.quantity).toLocaleString('en-PK')}</strong>
+        </td>
+      </tr>
+    `).join('');
+
     const templateParams = {
+      order_id: orderId,
       customer_name: orderData.name,
+      customer_email: orderData.email,     // Customer's email
+      to_email: orderData.email,           // Alias for common EmailJS behavior
+      email: orderData.email,              // Alias for common EmailJS behavior
+
+      order_items_html: orderItemsHtml,
+      shipping_cost: 'Free',
+      tax_cost: '0',
+      total_amount: `PKR ${orderData.total}`, // Ensure formatting
+
       customer_phone: orderData.phone,
       customer_address: orderData.address,
-      order_items: orderData.items.map(item => 
-        `${item.name} x${item.quantity} = PKR ${(item.price * item.quantity).toLocaleString('en-PK')}`
-      ).join('\n'),
-      total_amount: `PKR ${orderData.total}`,
       order_date: new Date().toLocaleDateString('en-PK'),
       company_name: import.meta.env.VITE_COMPANY_NAME,
       company_email: import.meta.env.VITE_COMPANY_EMAIL,
@@ -55,7 +80,7 @@ export const sendContactForm = async (contactData) => {
 
   const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID_CONTACT;
-  
+
   if (!serviceId || !templateId) {
     console.error('EmailJS Service ID or Template ID not found');
     return false;

@@ -1,21 +1,22 @@
 import React from 'react';
 
-const CartModal = ({ 
-  showCart, 
-  setShowCart, 
-  showConfirmation, 
-  cartItems, 
-  totalPrice, 
-  formData, 
-  handleInputChange, 
-  handleSubmit, 
+const CartModal = ({
+  showCart,
+  setShowCart,
+  showConfirmation,
+  cartItems,
+  totalPrice,
+  formData,
+  handleInputChange,
+  handleSubmit,
   handleNewOrder,
   increaseCartItemQuantity,
   decreaseCartItemQuantity,
-  removeCartItem 
+  removeCartItem
 }) => {
+  const [errors, setErrors] = React.useState({});
   return (
-    <div 
+    <div
       className={`fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm z-40 flex items-center justify-center p-4 ${showCart ? 'block' : 'hidden'}`}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
@@ -25,7 +26,7 @@ const CartModal = ({
     >
       <div className="bg-gray-900 border border-gray-700 rounded-lg shadow-xl w-full max-w-md p-6 relative transform transition-all">
         {/* Close Button */}
-        <button 
+        <button
           onClick={() => setShowCart(false)}
           className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
         >
@@ -43,7 +44,7 @@ const CartModal = ({
           </div>
           <h2 className="font-serif text-3xl text-gold mb-2">Congratulations!</h2>
           <p className="text-gray-300">We have your order and will call you to confirm before we dispatch.</p>
-          <button 
+          <button
             onClick={handleNewOrder}
             className="mt-6 bg-gold text-black font-bold py-2 px-8 rounded-full hover:bg-opacity-90 transition-colors"
           >
@@ -65,20 +66,20 @@ const CartModal = ({
                       <p className="text-sm text-gray-400">PKR {item.price.toLocaleString('en-PK')} each</p>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <button 
+                      <button
                         onClick={() => decreaseCartItemQuantity(item.id)}
                         className="w-6 h-6 rounded-full border border-gray-600 text-gray-300 hover:text-white hover:border-gold flex items-center justify-center text-sm"
                       >
                         -
                       </button>
                       <span className="w-8 text-center">{item.quantity}</span>
-                      <button 
+                      <button
                         onClick={() => increaseCartItemQuantity(item.id)}
                         className="w-6 h-6 rounded-full border border-gray-600 text-gray-300 hover:text-white hover:border-gold flex items-center justify-center text-sm"
                       >
                         +
                       </button>
-                      <button 
+                      <button
                         onClick={() => removeCartItem(item.id)}
                         className="ml-2 text-red-400 hover:text-red-300 transition-colors"
                         title="Remove item"
@@ -103,39 +104,94 @@ const CartModal = ({
             )}
           </div>
           {/* User Details Form */}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            // Validation Logic
+            const newErrors = {};
+            if (!formData.name.trim() || formData.name.length < 3) newErrors.name = 'Name must be at least 3 characters.';
+            // Email Regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!formData.email || !emailRegex.test(formData.email)) newErrors.email = 'Please enter a valid email address.';
+            // Pakistan Phone Regex (03 followed by 9 digits)
+            const phoneRegex = /^03\d{9}$/;
+            if (!formData.phone || !phoneRegex.test(formData.phone)) newErrors.phone = 'Enter valid Pakistani mobile number (e.g., 03001234567).';
+
+            if (!formData.address.trim() || formData.address.length < 10) newErrors.address = 'Please provide a complete address (min 10 chars).';
+
+            if (Object.keys(newErrors).length > 0) {
+              setErrors(newErrors);
+              return;
+            }
+
+            // Clear errors and submit
+            setErrors({});
+            handleSubmit(e);
+          }}>
             <h3 className="text-xl font-bold mb-4">Your Details</h3>
             <div className="space-y-4">
-              <input 
-                type="text" 
-                name="name"
-                placeholder="Full Name" 
-                value={formData.name}
-                onChange={handleInputChange}
-                className="w-full bg-gray-800 border border-gray-700 rounded-md p-3 focus:ring-gold focus:border-gold" 
-                required 
-              />
-              <input 
-                type="tel" 
-                name="phone"
-                placeholder="Phone Number" 
-                value={formData.phone}
-                onChange={handleInputChange}
-                className="w-full bg-gray-800 border border-gray-700 rounded-md p-3 focus:ring-gold focus:border-gold" 
-                required 
-              />
-              <textarea 
-                name="address"
-                placeholder="Shipping Address" 
-                rows="3" 
-                value={formData.address}
-                onChange={handleInputChange}
-                className="w-full bg-gray-800 border border-gray-700 rounded-md p-3 focus:ring-gold focus:border-gold" 
-                required
-              />
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Full Name"
+                  value={formData.name}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                    if (errors.name) setErrors({ ...errors, name: '' });
+                  }}
+                  className={`w-full bg-black border ${errors.name ? 'border-red-500' : 'border-gray-700'} rounded-md p-3 text-white focus:ring-gold focus:border-gold`}
+                />
+                {errors.name && <p className="text-red-500 text-xs mt-1 text-left">{errors.name}</p>}
+              </div>
+
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  value={formData.email}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                    if (errors.email) setErrors({ ...errors, email: '' });
+                  }}
+                  className={`w-full bg-black border ${errors.email ? 'border-red-500' : 'border-gray-700'} rounded-md p-3 text-white focus:ring-gold focus:border-gold`}
+                />
+                {errors.email && <p className="text-red-500 text-xs mt-1 text-left">{errors.email}</p>}
+              </div>
+
+              <div>
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Mobile Number (03...)"
+                  value={formData.phone}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                    if (errors.phone) setErrors({ ...errors, phone: '' });
+                  }}
+                  maxLength={11}
+                  className={`w-full bg-black border ${errors.phone ? 'border-red-500' : 'border-gray-700'} rounded-md p-3 text-white focus:ring-gold focus:border-gold`}
+                />
+                {errors.phone && <p className="text-red-500 text-xs mt-1 text-left">{errors.phone}</p>}
+              </div>
+
+              <div>
+                <textarea
+                  name="address"
+                  placeholder="Complete Shipping Address"
+                  rows="3"
+                  value={formData.address}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                    if (errors.address) setErrors({ ...errors, address: '' });
+                  }}
+                  className={`w-full bg-black border ${errors.address ? 'border-red-500' : 'border-gray-700'} rounded-md p-3 text-white focus:ring-gold focus:border-gold`}
+                />
+                {errors.address && <p className="text-red-500 text-xs mt-1 text-left">{errors.address}</p>}
+              </div>
             </div>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="w-full bg-gold text-black font-bold py-3 px-10 rounded-full hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 mt-6 disabled:bg-gray-600 disabled:cursor-not-allowed disabled:transform-none"
               disabled={cartItems.length === 0}
             >

@@ -78,7 +78,7 @@ const ContactForm = () => {
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
                   Phone Number
@@ -90,7 +90,7 @@ const ContactForm = () => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   className="w-full bg-gray-800 border border-gray-700 rounded-md p-3 focus:ring-gold focus:border-gold text-white"
-                  placeholder="+92-XXX-XXXXXXX"
+                  placeholder="03489468150"
                 />
               </div>
 
