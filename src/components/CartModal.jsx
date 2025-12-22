@@ -92,9 +92,6 @@ const CartModal = ({
                         </svg>
                       </button>
                     </div>
-                    <div className="ml-4 text-right">
-                      <p className="font-bold">PKR {(item.price * item.quantity).toLocaleString('en-PK')}</p>
-                    </div>
                   </div>
                 ))}
                 <div className="flex justify-between items-center text-white font-bold text-lg pt-2">

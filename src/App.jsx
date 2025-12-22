@@ -264,6 +264,11 @@ function App() {
     setCartItems(prev => prev.filter(item => item.id !== itemId));
   };
 
+  // Helper to add item to cart
+  const addToCart = (item) => {
+    setCartItems(prev => [...prev, item]);
+  };
+
   const price = 1500; // Price in PKR
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = (totalItems * price).toLocaleString('en-PK');
@@ -291,12 +296,22 @@ function App() {
         totalItems={totalItems}
         onCartClick={() => {
           setShowConfirmation(false);
+          // Add 1 item if cart is empty
+          if (cartItems.length === 0) {
+            addToCart({
+              id: Date.now(),
+              name: 'Floralock Organic Shampoo',
+              price: 1500,
+              quantity: 1,
+              image: '/floralock-product.png'
+            });
+          }
           setShowCart(true);
         }}
       />
 
       <main>
-        <HeroSection />
+        <HeroSection setShowCart={setShowCart} addToCart={addToCart} />
         <AboutSection />
         <BenefitsSection />
         <IngredientsSection />

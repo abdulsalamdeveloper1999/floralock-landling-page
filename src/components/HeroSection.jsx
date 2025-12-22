@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HeroSection = () => {
+const HeroSection = ({ setShowCart, addToCart }) => {
   return (
     <section className="min-h-screen flex items-center justify-center pt-20 pb-10">
       <div className="container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
@@ -21,13 +21,24 @@ const HeroSection = () => {
           <p className="text-gray-300 mt-4 max-w-md mx-auto md:mx-0 stagger-item">For Strong, Healthy & Natural Locks</p>
 
           <div className="mt-8 stagger-item">
-            <a
-              href="#shop"
+            <button
+              onClick={() => {
+                // Add 1 item to cart automatically
+                const newItem = {
+                  id: Date.now(),
+                  name: 'Floralock Organic Shampoo',
+                  price: 1500,
+                  quantity: 1,
+                  image: '/floralock-product.png'
+                };
+                addToCart(newItem);
+                setShowCart(true);
+              }}
               className="inline-block bg-gold text-black font-bold py-3 px-10 rounded-full btn-enhanced btn-ripple"
               data-umami-event="Shop Now Clicked"
             >
               Shop Now
-            </a>
+            </button>
           </div>
           <p className="text-gray-400 text-xs mt-4 tracking-wider stagger-item">Eco-Friendly | Paraben-Free | Chemical-Free | Cruelty-Free</p>
         </div>
