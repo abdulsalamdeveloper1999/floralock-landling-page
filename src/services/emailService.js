@@ -47,14 +47,15 @@ export const sendOrderConfirmation = async (orderData) => {
     const templateParams = {
       order_id: orderId,
       customer_name: orderData.name,
-      customer_email: orderData.email,     // Customer's email
-      to_email: orderData.email,           // Alias for common EmailJS behavior
-      email: orderData.email,              // Alias for common EmailJS behavior
+      customer_email: orderData.email,
+      to_email: orderData.email,
+      email: orderData.email,
+      is_admin: false,  // Customer email flag
 
       order_items_html: orderItemsHtml,
       shipping_cost: 'Free',
       tax_cost: '0',
-      total_amount: `PKR ${orderData.total}`, // Ensure formatting
+      total_amount: `PKR ${orderData.total}`,
 
       customer_phone: orderData.phone,
       customer_address: orderData.address,
@@ -65,8 +66,27 @@ export const sendOrderConfirmation = async (orderData) => {
       company_address: import.meta.env.VITE_COMPANY_ADDRESS
     };
 
-    const result = await emailjs.send(serviceId, templateId, templateParams);
-    console.log('Order confirmation email sent successfully:', result);
+    // Send email to customer
+    const customerResult = await emailjs.send(serviceId, templateId, templateParams);
+    console.log('Order confirmation email sent to customer:', customerResult);
+
+    // Send email to admin
+    const adminEmail = 'info@floralock.com';
+    const adminTemplateParams = {
+      ...templateParams,
+      to_email: adminEmail,
+      email: adminEmail,
+      is_admin: true  // Admin email flag
+    };
+
+    try {
+      const adminResult = await emailjs.send(serviceId, templateId, adminTemplateParams);
+      console.log('Order notification email sent to admin:', adminResult);
+    } catch (adminError) {
+      console.error('Failed to send order notification to admin:', adminError);
+      // Don't fail the whole operation if admin email fails
+    }
+
     return true;
   } catch (error) {
     console.error('Failed to send order confirmation email:', error);
