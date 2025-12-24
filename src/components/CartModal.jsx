@@ -24,7 +24,7 @@ const CartModal = ({
         }
       }}
     >
-      <div className="bg-gray-900 border border-gray-700 rounded-lg shadow-xl w-full max-w-md p-6 relative transform transition-all">
+      <div className="bg-gray-900 border border-gray-700 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto p-4 sm:p-6 relative transform transition-all">
         {/* Close Button */}
         <button
           onClick={() => setShowCart(false)}
