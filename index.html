@@ -5,7 +5,14 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/applogo.png" />
     <link rel="apple-touch-icon" href="/applogo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Mobile Optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="MobileOptimized" content="width" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
     <title>Floralock™ | 100% Organic Shampoo</title>
 
     <!-- Tailwind CSS -->
@@ -28,6 +35,19 @@
             background-color: #0e0e0e;
             color: #f0f0f0;
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            /* Mobile optimization */
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-text-size-adjust: 100%;
+            touch-action: pan-y;
+        }
+
+        /* Prevent zoom on input focus */
+        input,
+        textarea,
+        select {
+            font-size: 16px !important;
         }
 
         .font-serif {
