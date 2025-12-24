@@ -71,7 +71,7 @@ export const sendOrderConfirmation = async (orderData) => {
     console.log('Order confirmation email sent to customer:', customerResult);
 
     // Send email to admin
-    const adminEmail = 'info@floralock.com';
+    const adminEmail = import.meta.env.VITE_COMPANY_EMAIL; // infofloralock@gmail.com
     const adminTemplateParams = {
       ...templateParams,
       to_email: adminEmail,
