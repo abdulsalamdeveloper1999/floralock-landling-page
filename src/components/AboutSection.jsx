@@ -1,30 +1,31 @@
 import React from 'react';
+import { FlaskConical, Shield, BadgeCheck, PawPrint } from 'lucide-react';
 
 const AboutSection = () => {
   const pillars = [
     {
-      icon: '🧪',
+      icon: <FlaskConical size={26} strokeWidth={1.5} color="#C9973A" />,
       title: 'Paraben Free',
       desc: 'No harmful preservatives. Just nature doing its thing.',
       color: 'rgba(201,151,58,0.1)',
       border: 'rgba(201,151,58,0.25)',
     },
     {
-      icon: '🛡️',
+      icon: <Shield size={26} strokeWidth={1.5} color="#6B7C3D" />,
       title: 'Chemical Free',
       desc: 'Zero synthetic chemicals. Pure botanical goodness.',
       color: 'rgba(107,124,61,0.15)',
       border: 'rgba(107,124,61,0.15)',
     },
     {
-      icon: '☪️',
+      icon: <BadgeCheck size={26} strokeWidth={1.5} color="#B8862E" />,
       title: 'Halal Certified',
       desc: 'Certified and trusted — made with full integrity.',
       color: 'rgba(184,134,46,0.12)',
       border: 'rgba(184,134,46,0.28)',
     },
     {
-      icon: '🐾',
+      icon: <PawPrint size={26} strokeWidth={1.5} color="#8EA050" />,
       title: 'Cruelty Free',
       desc: 'Never tested on animals. Always made with compassion.',
       color: 'rgba(142,160,80,0.12)',

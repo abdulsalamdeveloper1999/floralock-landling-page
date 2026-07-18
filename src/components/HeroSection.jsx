@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { Star, Sprout } from 'lucide-react';
 
 const HeroSection = ({ setShowCart, addToCart }) => {
   const heroRef = useRef(null);
@@ -39,7 +40,7 @@ const HeroSection = ({ setShowCart, addToCart }) => {
   const stats = [
     { value: '10K+', label: 'Happy Customers' },
     { value: '100%', label: 'Organic' },
-    { value: '4.9★', label: 'Rating' },
+    { value: <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>4.9 <Star size={24} fill="currentColor" /></span>, label: 'Rating' },
   ];
 
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import { PartyPopper } from 'lucide-react';
 
 const inputStyle = (hasError) => ({
   width: '100%',
@@ -125,7 +126,11 @@ const CartModal = ({
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-            }}>Order Confirmed! 🎉</h2>
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem'
+            }}>Order Confirmed! <PartyPopper size={28} color="#C9973A" /></h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '2rem' }}>
               Thank you! We've received your order and will call you to confirm before dispatch. Expected delivery: 3–5 business days.
             </p>

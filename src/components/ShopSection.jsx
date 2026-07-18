@@ -1,4 +1,5 @@
 import React from 'react';
+import { Truck, RotateCcw, ShieldCheck, Leaf } from 'lucide-react';
 
 const ShopSection = ({
   price,
@@ -9,10 +10,10 @@ const ShopSection = ({
   handleAddToCart
 }) => {
   const features = [
-    { icon: '🚚', text: 'Free Delivery in Pakistan' },
-    { icon: '🔄', text: '30-Day Return Policy' },
-    { icon: '🔒', text: 'Secure Cash on Delivery' },
-    { icon: '🌿', text: '100% Organic Certified' },
+    { icon: <Truck size={16} strokeWidth={1.5} color="#C9973A" />, text: 'Free Delivery in Pakistan' },
+    { icon: <RotateCcw size={16} strokeWidth={1.5} color="#C9973A" />, text: '30-Day Return Policy' },
+    { icon: <ShieldCheck size={16} strokeWidth={1.5} color="#C9973A" />, text: 'Secure Cash on Delivery' },
+    { icon: <Leaf size={16} strokeWidth={1.5} color="#C9973A" />, text: '100% Organic Certified' },
   ];
 
   return (
@@ -97,8 +98,11 @@ const ShopSection = ({
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
                   zIndex: 2,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.35rem'
                 }}>
-                  🌿 Organic
+                  <Leaf size={14} strokeWidth={2} /> Organic
                 </div>
               </div>
 

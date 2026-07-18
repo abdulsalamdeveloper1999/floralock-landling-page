@@ -1,9 +1,10 @@
 import React from 'react';
+import { Sprout, Leaf, Droplets, Sparkles } from 'lucide-react';
 
 const BenefitsSection = () => {
   const benefits = [
     {
-      icon: '💪',
+      icon: <Sprout size={28} strokeWidth={1.5} color="#C9973A" />,
       gradient: 'linear-gradient(135deg, rgba(201,151,58,0.07) 0%, rgba(201,151,58,0.04) 100%)',
       border: 'rgba(201,151,58,0.25)',
       accent: '#C9973A',
@@ -12,7 +13,7 @@ const BenefitsSection = () => {
       tag: 'Strengthening',
     },
     {
-      icon: '🍃',
+      icon: <Leaf size={28} strokeWidth={1.5} color="#6B7C3D" />,
       gradient: 'linear-gradient(135deg, rgba(107,124,61,0.15) 0%, rgba(107,124,61,0.15) 100%)',
       border: 'rgba(107,124,61,0.15)',
       accent: '#6B7C3D',
@@ -21,7 +22,7 @@ const BenefitsSection = () => {
       tag: 'Anti Hair-Loss',
     },
     {
-      icon: '🌊',
+      icon: <Droplets size={28} strokeWidth={1.5} color="#E8B84B" />,
       gradient: 'linear-gradient(135deg, rgba(232,184,75,0.12) 0%, rgba(232,184,75,0.04) 100%)',
       border: 'rgba(232,184,75,0.25)',
       accent: '#E8B84B',
@@ -30,7 +31,7 @@ const BenefitsSection = () => {
       tag: 'Scalp Care',
     },
     {
-      icon: '✨',
+      icon: <Sparkles size={28} strokeWidth={1.5} color="#B8862E" />,
       gradient: 'linear-gradient(135deg, rgba(184,134,46,0.14) 0%, rgba(184,134,46,0.04) 100%)',
       border: 'rgba(184,134,46,0.28)',
       accent: '#B8862E',
