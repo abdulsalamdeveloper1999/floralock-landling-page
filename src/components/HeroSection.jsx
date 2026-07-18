@@ -75,7 +75,7 @@ const HeroSection = ({ setShowCart, addToCart }) => {
           willChange: 'transform',
         }}
       >
-        <source src={isMobile ? "/broll3.mp4" : "/broll1.mp4"} type="video/mp4" />
+        <source src={isMobile ? "/broll3-mobile.mp4" : "/broll1-opt.mp4"} type="video/mp4" />
       </video>
 
       {/* Dark overlay for text readability on left side */}

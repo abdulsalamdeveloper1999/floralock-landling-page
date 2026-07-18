@@ -64,7 +64,7 @@ const BenefitsSection = () => {
           opacity: 0.8,
         }}
       >
-        <source src="/broll2.mp4" type="video/mp4" />
+        <source src="/broll2-opt.mp4" type="video/mp4" />
       </video>
 
       {/* Dark overlay for readability */}
