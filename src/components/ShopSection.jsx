@@ -70,7 +70,7 @@ const ShopSection = ({
                     objectFit: 'cover',
                   }}
                 >
-                  <source src="/broll3.mp4" type="video/mp4" />
+                  <source src="/broll3-mobile.mp4" type="video/mp4" />
                 </video>
 
                 {/* Gradient blend to bridge seamlessly with the dark right panel */}
@@ -132,10 +132,10 @@ const ShopSection = ({
                 </div>
 
                 {/* Price */}
-                <div style={{ marginBottom: '1.75rem' }}>
+                <div style={{ marginBottom: '1.75rem', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.75rem' }}>
                   <span style={{
                     fontFamily: 'var(--font-serif)',
-                    fontSize: '2.5rem',
+                    fontSize: 'clamp(2rem, 6vw, 2.5rem)',
                     fontWeight: 900,
                     background: 'var(--grad-brand)',
                     WebkitBackgroundClip: 'text',
@@ -144,24 +144,25 @@ const ShopSection = ({
                   }}>
                     PKR {price.toLocaleString('en-PK')}
                   </span>
-                  <span style={{
-                    marginLeft: '0.75rem',
-                    fontSize: '1rem',
-                    color: 'var(--text-muted)',
-                    textDecoration: 'line-through',
-                  }}>PKR 1,500</span>
-                  <span style={{
-                    marginLeft: '0.5rem',
-                    padding: '0.15rem 0.5rem',
-                    background: 'rgba(239,68,68,0.15)',
-                    border: '1px solid rgba(239,68,68,0.3)',
-                    borderRadius: '6px',
-                    fontSize: '0.72rem',
-                    fontWeight: 700,
-                    color: '#f87171',
-                  }}>
-                    Save 17%
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{
+                      fontSize: '1rem',
+                      color: 'var(--text-muted)',
+                      textDecoration: 'line-through',
+                    }}>PKR 1,500</span>
+                    <span style={{
+                      padding: '0.15rem 0.5rem',
+                      background: 'rgba(239,68,68,0.15)',
+                      border: '1px solid rgba(239,68,68,0.3)',
+                      borderRadius: '6px',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      color: '#f87171',
+                      whiteSpace: 'nowrap',
+                    }}>
+                      Save 17%
+                    </span>
+                  </div>
                 </div>
 
                 {/* Quantity selector */}

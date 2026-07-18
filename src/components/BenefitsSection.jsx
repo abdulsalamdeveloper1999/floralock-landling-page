@@ -41,8 +41,8 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <section id="benefits" className="section-py" style={{ 
-      position: 'relative', 
+    <section id="benefits" className="section-py" style={{
+      position: 'relative',
       overflow: 'hidden',
       clipPath: 'inset(0)',
       transform: 'translateZ(0)',
