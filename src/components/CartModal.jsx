@@ -1,5 +1,19 @@
 import React from 'react';
 
+const inputStyle = (hasError) => ({
+  width: '100%',
+  padding: '0.875rem 1.1rem',
+  background: hasError ? 'rgba(239,68,68,0.06)' : 'rgba(255,255,255,0.04)',
+  border: `1px solid ${hasError ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.08)'}`,
+  borderRadius: '12px',
+  color: 'var(--text-primary)',
+  fontFamily: 'var(--font-sans)',
+  fontSize: '0.9rem',
+  outline: 'none',
+  transition: 'all 0.2s',
+  display: 'block',
+});
+
 const CartModal = ({
   showCart,
   setShowCart,
@@ -15,190 +29,297 @@ const CartModal = ({
   removeCartItem
 }) => {
   const [errors, setErrors] = React.useState({});
+
+  const handleFocus = (e) => {
+    e.target.style.borderColor = 'rgba(201,151,58,0.5)';
+    e.target.style.background = 'rgba(201,151,58,0.05)';
+    e.target.style.boxShadow = '0 0 0 3px rgba(201,151,58,0.1)';
+  };
+
+  const handleBlur = (e, hasError) => {
+    e.target.style.borderColor = hasError ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.08)';
+    e.target.style.background = hasError ? 'rgba(239,68,68,0.06)' : 'rgba(255,255,255,0.04)';
+    e.target.style.boxShadow = 'none';
+  };
+
+  if (!showCart) return null;
+
   return (
     <div
-      className={`fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm z-40 flex items-center justify-center p-4 ${showCart ? 'block' : 'hidden'}`}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          setShowCart(false);
-        }
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'rgba(0,0,0,0.75)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        zIndex: 200,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem',
+        animation: 'fadeInScale 0.3s ease forwards',
       }}
+      onClick={(e) => { if (e.target === e.currentTarget) setShowCart(false); }}
     >
-      <div className="bg-gray-900 border border-gray-700 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto p-4 sm:p-6 relative transform transition-all">
-        {/* Close Button */}
+      <div style={{
+        background: 'rgba(11, 11, 26, 0.95)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: '24px',
+        boxShadow: '0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(201,151,58,0.05)',
+        width: '100%',
+        maxWidth: '480px',
+        maxHeight: '90vh',
+        overflowY: 'auto',
+        padding: '2rem',
+        position: 'relative',
+      }}>
+        {/* Close button */}
         <button
           onClick={() => setShowCart(false)}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+          id="cart-close-btn"
+          style={{
+            position: 'absolute',
+            top: '1.25rem',
+            right: '1.25rem',
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.06)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            color: 'var(--text-secondary)',
+            transition: 'all 0.2s',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(239,68,68,0.15)'; e.currentTarget.style.color = '#f87171'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+          <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
-        {/* Order Confirmation View */}
-        <div className={`text-center py-8 ${showConfirmation ? 'block' : 'hidden'}`}>
-          <div className="w-24 h-24 mx-auto bg-green-accent rounded-full flex items-center justify-center mb-4">
-            <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
+        {/* ============ ORDER CONFIRMATION ============ */}
+        {showConfirmation ? (
+          <div style={{ textAlign: 'center', padding: '2rem 0' }}>
+            <div style={{
+              width: '80px', height: '80px',
+              borderRadius: '50%',
+              background: 'var(--grad-brand)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              margin: '0 auto 1.5rem',
+              boxShadow: '0 0 40px rgba(201,151,58,0.3)',
+            }}>
+              <svg width="36" height="36" fill="none" stroke="#fff" strokeWidth="2.5" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h2 style={{
+              fontFamily: 'var(--font-serif)',
+              fontSize: '2rem', fontWeight: 800,
+              marginBottom: '0.75rem',
+              background: 'var(--grad-brand)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>Order Confirmed! 🎉</h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '2rem' }}>
+              Thank you! We've received your order and will call you to confirm before dispatch. Expected delivery: 3–5 business days.
+            </p>
+            <button
+              onClick={handleNewOrder}
+              id="new-order-btn"
+              className="btn-primary"
+              style={{ width: '100%', justifyContent: 'center', padding: '1rem' }}
+              data-umami-event="Place Order"
+              data-umami-event-total={totalPrice}
+            >
+              Place New Order
+            </button>
           </div>
-          <h2 className="font-serif text-3xl text-gold mb-2">Congratulations!</h2>
-          <p className="text-gray-300">We have your order and will call you to confirm before we dispatch.</p>
-          <button
-            onClick={handleNewOrder}
-            className="mt-6 bg-gold text-black font-bold py-2 px-8 rounded-full hover:bg-opacity-90 transition-colors"
-            data-umami-event="Place Order"
-            data-umami-event-total={totalPrice}
-            data-umami-event-items={cartItems.length}
-          >
-            Place New Order
-          </button>
-        </div>
+        ) : (
+          /* ============ CHECKOUT FORM ============ */
+          <div>
+            <div style={{ marginBottom: '1.75rem', paddingRight: '2.5rem' }}>
+              <h2 style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: '1.75rem',
+                fontWeight: 800,
+                marginBottom: '0.25rem',
+                color: 'var(--text-primary)',
+              }}>
+                Your Order
+              </h2>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                Cash on Delivery · Free Shipping in Pakistan
+              </p>
+            </div>
 
-        {/* Checkout Form View */}
-        <div className={showConfirmation ? 'hidden' : 'block'}>
-          <h2 className="font-serif text-3xl text-gold mb-4">Confirm Order</h2>
-          {/* Order Summary */}
-          <div className="border-b border-gray-700 pb-4 mb-4">
-            {cartItems.length > 0 ? (
-              <div className="space-y-3">
-                {cartItems.map((item) => (
-                  <div key={item.id} className="flex justify-between items-center text-white bg-gray-800 p-3 rounded-lg">
-                    <div className="flex-1">
-                      <p className="font-medium">{item.name}</p>
-                      <p className="text-sm text-gray-400">PKR {item.price.toLocaleString('en-PK')} each</p>
+            {/* Cart items */}
+            <div style={{
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.06)',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              marginBottom: '1.5rem',
+            }}>
+              {cartItems.length > 0 ? (
+                <>
+                  {cartItems.map((item, i) => (
+                    <div key={item.id} style={{
+                      padding: '1rem 1.25rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.75rem',
+                      borderBottom: i < cartItems.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
+                    }}>
+                      <div style={{
+                        width: '40px', height: '40px',
+                        borderRadius: '10px',
+                        background: 'rgba(201,151,58,0.1)',
+                        border: '1px solid rgba(201,151,58,0.2)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: '1.2rem', flexShrink: 0,
+                      }}>🌿</div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>PKR {item.price.toLocaleString('en-PK')} each</div>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', flexShrink: 0 }}>
+                        <button onClick={() => decreaseCartItemQuantity(item.id)} style={{ width: '24px', height: '24px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.04)', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>−</button>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 600, minWidth: '20px', textAlign: 'center', color: 'var(--text-primary)' }}>{item.quantity}</span>
+                        <button onClick={() => increaseCartItemQuantity(item.id)} style={{ width: '24px', height: '24px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.04)', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>+</button>
+                        <button onClick={() => removeCartItem(item.id)} style={{ width: '24px', height: '24px', marginLeft: '0.25rem', borderRadius: '6px', border: '1px solid rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.08)', color: '#f87171', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <svg width="10" height="10" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <button
-                        onClick={() => decreaseCartItemQuantity(item.id)}
-                        className="w-6 h-6 rounded-full border border-gray-600 text-gray-300 hover:text-white hover:border-gold flex items-center justify-center text-sm"
-                      >
-                        -
-                      </button>
-                      <span className="w-8 text-center">{item.quantity}</span>
-                      <button
-                        onClick={() => increaseCartItemQuantity(item.id)}
-                        className="w-6 h-6 rounded-full border border-gray-600 text-gray-300 hover:text-white hover:border-gold flex items-center justify-center text-sm"
-                      >
-                        +
-                      </button>
-                      <button
-                        onClick={() => removeCartItem(item.id)}
-                        className="ml-2 text-red-400 hover:text-red-300 transition-colors"
-                        title="Remove item"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                        </svg>
-                      </button>
-                    </div>
+                  ))}
+
+                  {/* Total */}
+                  <div style={{
+                    padding: '1rem 1.25rem',
+                    background: 'rgba(201,151,58,0.05)',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    borderTop: '1px solid rgba(201,151,58,0.07)',
+                  }}>
+                    <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>Total</span>
+                    <span style={{
+                      fontFamily: 'var(--font-serif)',
+                      fontSize: '1.25rem',
+                      fontWeight: 700,
+                      background: 'var(--grad-brand)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}>
+                      PKR {totalPrice}
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                  Your cart is empty.
+                </div>
+              )}
+            </div>
+
+            {/* Details form */}
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              const newErrors = {};
+              if (!formData.name.trim() || formData.name.length < 3) newErrors.name = 'Name must be at least 3 characters.';
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              if (!formData.email || !emailRegex.test(formData.email)) newErrors.email = 'Please enter a valid email address.';
+              const phoneRegex = /^03\d{9}$/;
+              if (!formData.phone || !phoneRegex.test(formData.phone)) newErrors.phone = 'Enter a valid Pakistani number (e.g., 03001234567).';
+              if (!formData.address.trim() || formData.address.length < 10) newErrors.address = 'Please provide a complete address (min 10 chars).';
+
+              if (Object.keys(newErrors).length > 0) {
+                setErrors(newErrors);
+                return;
+              }
+              setErrors({});
+              handleSubmit(e);
+            }}>
+              <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '1rem' }}>
+                Delivery Details
+              </h3>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+                {[
+                  { name: 'name', type: 'text', placeholder: 'Full Name', error: errors.name },
+                  { name: 'email', type: 'email', placeholder: 'Email Address', error: errors.email },
+                  { name: 'phone', type: 'tel', placeholder: 'Mobile Number (03...)', error: errors.phone, maxLength: 11 },
+                ].map(field => (
+                  <div key={field.name}>
+                    <input
+                      type={field.type}
+                      name={field.name}
+                      placeholder={field.placeholder}
+                      value={formData[field.name]}
+                      maxLength={field.maxLength}
+                      id={`cart-${field.name}`}
+                      onChange={(e) => { handleInputChange(e); if (errors[field.name]) setErrors({ ...errors, [field.name]: '' }); }}
+                      onFocus={handleFocus}
+                      onBlur={(e) => handleBlur(e, !!errors[field.name])}
+                      style={inputStyle(!!errors[field.name])}
+                    />
+                    {errors[field.name] && (
+                      <p style={{ fontSize: '0.72rem', color: '#f87171', marginTop: '0.3rem' }}>{errors[field.name]}</p>
+                    )}
                   </div>
                 ))}
-                <div className="flex justify-between items-center text-white font-bold text-lg pt-2">
-                  <span>Total:</span>
-                  <span>PKR {totalPrice}</span>
+
+                <div>
+                  <textarea
+                    name="address"
+                    placeholder="Complete Shipping Address"
+                    rows={3}
+                    id="cart-address"
+                    value={formData.address}
+                    onChange={(e) => { handleInputChange(e); if (errors.address) setErrors({ ...errors, address: '' }); }}
+                    onFocus={handleFocus}
+                    onBlur={(e) => handleBlur(e, !!errors.address)}
+                    style={{ ...inputStyle(!!errors.address), resize: 'none' }}
+                  />
+                  {errors.address && (
+                    <p style={{ fontSize: '0.72rem', color: '#f87171', marginTop: '0.3rem' }}>{errors.address}</p>
+                  )}
                 </div>
               </div>
-            ) : (
-              <p className="text-gray-400 text-center">Your cart is empty.</p>
-            )}
+
+              <button
+                type="submit"
+                id="confirm-order-btn"
+                className="btn-primary"
+                disabled={cartItems.length === 0}
+                style={{
+                  width: '100%',
+                  justifyContent: 'center',
+                  padding: '1rem',
+                  fontSize: '1rem',
+                  marginTop: '1.25rem',
+                  opacity: cartItems.length === 0 ? 0.5 : 1,
+                  cursor: cartItems.length === 0 ? 'not-allowed' : 'pointer',
+                }}
+              >
+                Confirm Order
+                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            </form>
           </div>
-          {/* User Details Form */}
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            // Validation Logic
-            const newErrors = {};
-            if (!formData.name.trim() || formData.name.length < 3) newErrors.name = 'Name must be at least 3 characters.';
-            // Email Regex
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!formData.email || !emailRegex.test(formData.email)) newErrors.email = 'Please enter a valid email address.';
-            // Pakistan Phone Regex (03 followed by 9 digits)
-            const phoneRegex = /^03\d{9}$/;
-            if (!formData.phone || !phoneRegex.test(formData.phone)) newErrors.phone = 'Enter valid Pakistani mobile number (e.g., 03001234567).';
-
-            if (!formData.address.trim() || formData.address.length < 10) newErrors.address = 'Please provide a complete address (min 10 chars).';
-
-            if (Object.keys(newErrors).length > 0) {
-              setErrors(newErrors);
-              return;
-            }
-
-            // Clear errors and submit
-            setErrors({});
-            handleSubmit(e);
-          }}>
-            <h3 className="text-xl font-bold mb-4">Your Details</h3>
-            <div className="space-y-4">
-              <div>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Full Name"
-                  value={formData.name}
-                  onChange={(e) => {
-                    handleInputChange(e);
-                    if (errors.name) setErrors({ ...errors, name: '' });
-                  }}
-                  className={`w-full bg-black border ${errors.name ? 'border-red-500' : 'border-gray-700'} rounded-md p-3 text-white focus:ring-gold focus:border-gold`}
-                />
-                {errors.name && <p className="text-red-500 text-xs mt-1 text-left">{errors.name}</p>}
-              </div>
-
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  value={formData.email}
-                  onChange={(e) => {
-                    handleInputChange(e);
-                    if (errors.email) setErrors({ ...errors, email: '' });
-                  }}
-                  className={`w-full bg-black border ${errors.email ? 'border-red-500' : 'border-gray-700'} rounded-md p-3 text-white focus:ring-gold focus:border-gold`}
-                />
-                {errors.email && <p className="text-red-500 text-xs mt-1 text-left">{errors.email}</p>}
-              </div>
-
-              <div>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Mobile Number (03...)"
-                  value={formData.phone}
-                  onChange={(e) => {
-                    handleInputChange(e);
-                    if (errors.phone) setErrors({ ...errors, phone: '' });
-                  }}
-                  maxLength={11}
-                  className={`w-full bg-black border ${errors.phone ? 'border-red-500' : 'border-gray-700'} rounded-md p-3 text-white focus:ring-gold focus:border-gold`}
-                />
-                {errors.phone && <p className="text-red-500 text-xs mt-1 text-left">{errors.phone}</p>}
-              </div>
-
-              <div>
-                <textarea
-                  name="address"
-                  placeholder="Complete Shipping Address"
-                  rows="3"
-                  value={formData.address}
-                  onChange={(e) => {
-                    handleInputChange(e);
-                    if (errors.address) setErrors({ ...errors, address: '' });
-                  }}
-                  className={`w-full bg-black border ${errors.address ? 'border-red-500' : 'border-gray-700'} rounded-md p-3 text-white focus:ring-gold focus:border-gold`}
-                />
-                {errors.address && <p className="text-red-500 text-xs mt-1 text-left">{errors.address}</p>}
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-gold text-black font-bold py-3 px-10 rounded-full hover:bg-opacity-90 transform hover:scale-105 transition-all duration-300 mt-6 disabled:bg-gray-600 disabled:cursor-not-allowed disabled:transform-none"
-              disabled={cartItems.length === 0}
-            >
-              Confirm Order
-            </button>
-          </form>
-        </div>
+        )}
       </div>
     </div>
   );

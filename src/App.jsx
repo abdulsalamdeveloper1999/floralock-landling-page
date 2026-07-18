@@ -53,53 +53,21 @@ function App() {
     };
   }, []);
 
-  // Create floating background particles
+  // Scroll reveal animations for new design system
   useEffect(() => {
-    const createParticles = () => {
-      const particleCount = 20;
-      const shapes = ['●', '◆', '★', '✦', '❋'];
-      const colors = ['rgba(197, 162, 91, 0.25)', 'rgba(94, 179, 94, 0.2)', 'rgba(240, 215, 140, 0.2)'];
-
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'floating-particle';
-        particle.textContent = shapes[Math.floor(Math.random() * shapes.length)];
-        particle.style.fontSize = (Math.random() * 40 + 30) + 'px';
-        particle.style.color = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animation = `floatParticle ${Math.random() * 10 + 10}s ease-in-out infinite`;
-        particle.style.animationDelay = Math.random() * 5 + 's';
-        document.body.appendChild(particle);
-      }
-    };
-
-    createParticles();
-
-    return () => {
-      document.querySelectorAll('.floating-particle').forEach(p => p.remove());
-    };
-  }, []);
-
-  // Scroll animations
-  useEffect(() => {
-    const sections = document.querySelectorAll('.fade-in-section');
+    const revealEls = document.querySelectorAll('.reveal, .reveal-scale');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
+          entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    sections.forEach(section => {
-      observer.observe(section);
-    });
+    revealEls.forEach(el => observer.observe(el));
 
     return () => {
-      sections.forEach(section => {
-        observer.unobserve(section);
-      });
+      revealEls.forEach(el => observer.unobserve(el));
     };
   }, []);
 
