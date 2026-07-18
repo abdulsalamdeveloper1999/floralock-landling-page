@@ -1,31 +1,32 @@
 import React from 'react';
+import { Droplets, Droplet, Hand, Bath, Calendar, Thermometer, Timer, Moon } from 'lucide-react';
 
 const HowToUseSection = () => {
   const steps = [
     {
       number: '01',
-      icon: '💦',
+      icon: <Droplets size={32} strokeWidth={1.5} color="#A89880" />,
       title: 'Wet Your Hair',
       desc: 'Thoroughly saturate your hair with warm water to open the cuticle for maximum absorption.',
       color: '#A89880',
     },
     {
       number: '02',
-      icon: '🧴',
+      icon: <Droplet size={32} strokeWidth={1.5} color="#C9973A" />,
       title: 'Apply FloraLock',
       desc: 'Squeeze a generous amount onto your palm. Apply from roots to tips, working through every strand.',
       color: '#C9973A',
     },
     {
       number: '03',
-      icon: '🙌',
+      icon: <Hand size={32} strokeWidth={1.5} color="#8EA050" />,
       title: 'Massage & Lather',
       desc: 'Use fingertips to massage gently into the scalp for 60 seconds, building a rich, nourishing lather.',
       color: '#8EA050',
     },
     {
       number: '04',
-      icon: '🚿',
+      icon: <Bath size={32} strokeWidth={1.5} color="#C9973A" />,
       title: 'Rinse Thoroughly',
       desc: 'Rinse completely with lukewarm water. Use weekly for maintenance, or twice weekly for best results.',
       color: '#C9973A',
@@ -161,10 +162,10 @@ const HowToUseSection = () => {
             justifyContent: 'center',
           }}>
             {[
-              { icon: '📅', tip: 'Use 2–3x per week', sub: 'For best results' },
-              { icon: '🌡️', tip: 'Lukewarm water', sub: 'Preserves nutrients' },
-              { icon: '⏱️', tip: '60-sec massage', sub: 'Activates ingredients' },
-              { icon: '🌙', tip: 'Night routine', sub: 'Maximize absorption' },
+              { icon: <Calendar size={24} strokeWidth={1.5} color="#A89880" />, tip: 'Use 2–3x per week', sub: 'For best results' },
+              { icon: <Thermometer size={24} strokeWidth={1.5} color="#A89880" />, tip: 'Lukewarm water', sub: 'Preserves nutrients' },
+              { icon: <Timer size={24} strokeWidth={1.5} color="#A89880" />, tip: '60-sec massage', sub: 'Activates ingredients' },
+              { icon: <Moon size={24} strokeWidth={1.5} color="#A89880" />, tip: 'Night routine', sub: 'Maximize absorption' },
             ].map(t => (
               <div key={t.tip} style={{ textAlign: 'center', minWidth: '100px' }}>
                 <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{t.icon}</div>
