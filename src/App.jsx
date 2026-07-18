@@ -134,7 +134,7 @@ function App() {
       ...formData,
       items: cartItems,
       totalItems: totalItems,
-      total: (totalItems * 1500).toLocaleString('en-PK')
+      total: (totalItems * 1250).toLocaleString('en-PK')
     };
 
     console.log('Order Submitted:', orderData);
@@ -193,7 +193,7 @@ function App() {
             : item
         );
       } else {
-        return [...prev, { id: 'floralock-shampoo', name: 'Floralock™ Organic Shampoo', price: 1500, quantity: quantity }];
+        return [...prev, { id: 'floralock-shampoo', name: 'Floralock™ Organic Shampoo', price: 1250, quantity: quantity }];
       }
     });
     setQuantity(1);
@@ -234,10 +234,21 @@ function App() {
 
   // Helper to add item to cart
   const addToCart = (item) => {
-    setCartItems(prev => [...prev, item]);
+    setCartItems(prev => {
+      const existingItem = prev.find(i => i.id === item.id);
+      if (existingItem) {
+        return prev.map(i =>
+          i.id === item.id
+            ? { ...i, quantity: i.quantity + item.quantity }
+            : i
+        );
+      } else {
+        return [...prev, item];
+      }
+    });
   };
 
-  const price = 1500; // Price in PKR
+  const price = 1250; // Price in PKR
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = (totalItems * price).toLocaleString('en-PK');
 
@@ -269,9 +280,9 @@ function App() {
             addToCart({
               id: Date.now(),
               name: 'Floralock Organic Shampoo',
-              price: 1500,
-              quantity: 1,
-              image: '/floralock-product.png'
+              price: price,
+              quantity: quantity,
+              image: '/benefits-bottle.png'
             });
           }
           setShowCart(true);

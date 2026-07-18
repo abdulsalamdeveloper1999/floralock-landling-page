@@ -3,6 +3,14 @@ import React, { useRef, useEffect, useState } from 'react';
 const HeroSection = ({ setShowCart, addToCart }) => {
   const heroRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,11 +26,11 @@ const HeroSection = ({ setShowCart, addToCart }) => {
 
   const handleShopNow = () => {
     const newItem = {
-      id: Date.now(),
-      name: 'Floralock Organic Shampoo',
-      price: 1500,
+      id: 'floralock-shampoo',
+      name: 'Floralock™ Organic Shampoo',
+      price: 1250,
       quantity: 1,
-      image: '/floralock-product.png'
+      image: '/benefits-bottle.png'
     };
     addToCart(newItem);
     setShowCart(true);
@@ -49,6 +57,7 @@ const HeroSection = ({ setShowCart, addToCart }) => {
     >
       {/* Background Video */}
       <video
+        key={isMobile ? 'mobile-video' : 'desktop-video'}
         autoPlay
         muted
         loop
@@ -66,7 +75,7 @@ const HeroSection = ({ setShowCart, addToCart }) => {
           willChange: 'transform',
         }}
       >
-        <source src="/broll1.mkv" />
+        <source src={isMobile ? "/broll3.mp4" : "/broll1.mp4"} type="video/mp4" />
       </video>
 
       {/* Dark overlay for text readability on left side */}
@@ -78,15 +87,9 @@ const HeroSection = ({ setShowCart, addToCart }) => {
       }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '4rem',
-          alignItems: 'center',
-        }}>
+        <div className="hero-grid">
           {/* Left: Content */}
-          <div ref={heroRef} style={{
-            maxWidth: '640px',
+          <div ref={heroRef} className="hero-content-col" style={{
             animation: 'fadeInUp 1s ease forwards',
           }}>
             {/* Badge */}
@@ -151,7 +154,7 @@ const HeroSection = ({ setShowCart, addToCart }) => {
                 onClick={handleShopNow}
                 data-umami-event="Hero Shop Click"
               >
-                Shop Now — PKR 1,500 <span style={{ transition: 'transform 0.2s', display: 'inline-block' }}>→</span>
+                Shop Now — PKR 1,250 <span style={{ transition: 'transform 0.2s', display: 'inline-block' }}>→</span>
               </button>
               <a href="#about" className="btn-secondary" data-umami-event="Hero Learn More">
                 Learn More
@@ -182,14 +185,8 @@ const HeroSection = ({ setShowCart, addToCart }) => {
             </div>
           </div>
 
-          {/* Right: Empty column to hold space */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: 'relative',
-            height: '100%',
-          }}>
+          {/* Right: Floating Badges */}
+          <div className="hero-badges-col">
             {/* Floating info cards */}
             <div className="glass-card" style={{
               position: 'absolute',
@@ -254,30 +251,40 @@ const HeroSection = ({ setShowCart, addToCart }) => {
       </div>
 
       <style>{`
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: center;
+        }
+        .hero-content-col {
+          max-width: 640px;
+        }
+        .hero-badges-col {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          height: 100%;
+        }
         @media (max-width: 768px) {
-          #hero > .container > div {
+          .hero-grid {
             grid-template-columns: 1fr !important;
             gap: 2rem !important;
             text-align: center;
           }
-          #hero > .container > div > div:first-child {
-            order: 2;
+          .hero-badges-col {
+            display: none !important;
           }
-          #hero > .container > div > div:last-child {
-            order: 1;
+          .hero-content-col {
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           }
-          #hero > .container > div > div:first-child > div:nth-child(4) {
-            justify-content: center;
-          }
-          #hero > .container > div > div:first-child > div:nth-child(5) {
-            justify-content: center;
-          }
-          #hero > .container > div > div:first-child > div:nth-child(6) {
-            justify-content: center;
-          }
-          #hero > .container > div > div:last-child > div:last-child,
-          #hero > .container > div > div:last-child > div:nth-last-child(2) {
-            display: none;
+          /* Center the badges and buttons on mobile */
+          .hero-content-col > div {
+            justify-content: center !important;
           }
         }
       `}</style>

@@ -61,6 +61,15 @@ const HowToUseSection = () => {
           </p>
         </div>
 
+        {/* Cinematic How To Use Banner */}
+        <div className="reveal" style={{ maxWidth: '700px', margin: '0 auto 4rem', borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <img 
+            src="/benefits-bottle.png" 
+            alt="Reduce Hair Fall Naturally"
+            style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+          />
+        </div>
+
         {/* Steps — horizontal with connector */}
         <div style={{ position: 'relative' }}>
           {/* Connector line */}

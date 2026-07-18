@@ -42,6 +42,62 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
+        {/* Cinematic Testimonials Banner */}
+        <div className="reveal" style={{ maxWidth: '700px', margin: '0 auto 4rem', borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <img
+            src="/two-bottles.png"
+            alt="Shine Naturally, Style Easily"
+            style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+          />
+        </div>
+
+        {/* TikTok Influencer Review CTA */}
+        <div className="reveal" style={{ maxWidth: '800px', margin: '0 auto 4rem' }}>
+          <a href="https://vt.tiktok.com/ZSXuHdsyL/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+            <div className="glass-card-gradient" style={{
+              padding: '2.5rem',
+              borderRadius: '24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '2rem',
+              border: '1px solid rgba(255,255,255,0.08)',
+              transition: 'all 0.3s ease',
+              cursor: 'pointer',
+            }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.borderColor = 'var(--gold)';
+                e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(201,151,58,0.15)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+                <div style={{
+                  width: '64px', height: '64px', borderRadius: '50%', background: '#000',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(255,255,255,0.1)', flexShrink: 0
+                }}>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff">
+                    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 style={{ color: 'var(--text-primary)', fontSize: '1.25rem', marginBottom: '0.25rem' }}>Watch the Viral Review</h4>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>See why influencers are loving FloraLock on TikTok.</p>
+                </div>
+              </div>
+              <div style={{
+                background: 'var(--grad-brand)', color: '#000', padding: '0.875rem 2rem', borderRadius: '100px', fontWeight: 700, fontSize: '0.875rem', flexShrink: 0, textTransform: 'uppercase', letterSpacing: '0.05em'
+              }}>
+                Watch Now
+              </div>
+            </div>
+          </a>
+        </div>
+
         {/* Overall rating bar */}
         <div className="reveal glass-card" style={{ padding: '2rem 2.5rem', marginBottom: '3rem', display: 'flex', alignItems: 'center', gap: '3rem', flexWrap: 'wrap' }}>
           <div style={{ textAlign: 'center', minWidth: '80px' }}>
@@ -56,7 +112,7 @@ const TestimonialsSection = () => {
               lineHeight: 1,
             }}>4.9</div>
             <div style={{ display: 'flex', gap: '2px', justifyContent: 'center', margin: '0.4rem 0' }}>
-              {[1,2,3,4,5].map(s => (
+              {[1, 2, 3, 4, 5].map(s => (
                 <svg key={s} width="14" height="14" viewBox="0 0 24 24" fill="#f0c060">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                 </svg>

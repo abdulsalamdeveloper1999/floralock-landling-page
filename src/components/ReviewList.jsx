@@ -6,12 +6,12 @@ const ReviewList = () => {
   const [loading, setLoading] = useState(true);
 
   const mockReviews = [
-    { id: 'mock-1', customerName: 'Ayesha Rahman', rating: 5, comment: 'Absolutely love FloraLock! My hair has never been this healthy and shiny. The natural ingredients make all the difference.', createdAt: { toDate: () => new Date('2024-12-20') } },
-    { id: 'mock-2', customerName: 'Fatima Khan', rating: 5, comment: 'Best organic shampoo I have ever used! My hair fall reduced significantly after just 2 weeks. Highly recommended!', createdAt: { toDate: () => new Date('2024-12-18') } },
-    { id: 'mock-3', customerName: 'Sara Ahmed', rating: 4, comment: 'Great product! My hair feels softer and stronger. The flaxseed formula really works wonders.', createdAt: { toDate: () => new Date('2024-12-15') } },
-    { id: 'mock-4', customerName: 'Zainab Malik', rating: 5, comment: 'Finally found a chemical-free shampoo that actually works! My scalp feels healthier and my hair has natural shine.', createdAt: { toDate: () => new Date('2024-12-12') } },
-    { id: 'mock-5', customerName: 'Nadia Hassan', rating: 5, comment: 'FloraLock is a game changer! My hair is thicker and stronger. Love that it\'s 100% organic.', createdAt: { toDate: () => new Date('2024-12-10') } },
-    { id: 'mock-6', customerName: 'Mariam Ali', rating: 4, comment: 'Very impressed with the results. My hair feels nourished and healthy. Will definitely continue using!', createdAt: { toDate: () => new Date('2024-12-08') } },
+    { id: 'mock-1', customerName: 'Ayesha Rahman', rating: 5, comment: 'Absolutely love FloraLock! My hair has never been this healthy and shiny. The natural ingredients make all the difference.', createdAt: { toDate: () => new Date('2026-06-15') } },
+    { id: 'mock-2', customerName: 'Fatima Khan', rating: 5, comment: 'Best organic shampoo I have ever used! My hair fall reduced significantly after just 2 weeks. Highly recommended!', createdAt: { toDate: () => new Date('2026-04-20') } },
+    { id: 'mock-3', customerName: 'Sara Ahmed', rating: 4, comment: 'Great product! My hair feels softer and stronger. The flaxseed formula really works wonders.', createdAt: { toDate: () => new Date('2026-02-10') } },
+    { id: 'mock-4', customerName: 'Zainab Malik', rating: 5, comment: 'Finally found a chemical-free shampoo that actually works! My scalp feels healthier and my hair has natural shine.', createdAt: { toDate: () => new Date('2025-11-05') } },
+    { id: 'mock-5', customerName: 'Nadia Hassan', rating: 5, comment: 'FloraLock is a game changer! My hair is thicker and stronger. Love that it\'s 100% organic.', createdAt: { toDate: () => new Date('2025-08-18') } },
+    { id: 'mock-6', customerName: 'Mariam Ali', rating: 4, comment: 'Very impressed with the results. My hair feels nourished and healthy. Will definitely continue using!', createdAt: { toDate: () => new Date('2025-05-22') } },
   ];
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const ReviewList = () => {
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
-      {reviews.map((review, i) => (
+      {reviews.slice(0, 6).map((review, i) => (
         <div key={review.id} className="glass-card" style={{ padding: '1.75rem', transitionDelay: `${i * 80}ms` }}>
           {/* Stars */}
           <div style={{ display: 'flex', gap: '3px', marginBottom: '1rem' }}>

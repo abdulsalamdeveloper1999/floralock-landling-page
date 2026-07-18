@@ -63,108 +63,105 @@ const AboutSection = () => {
           </p>
         </div>
 
-        {/* Two column: image + text */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center', marginBottom: '4rem' }}>
-          {/* Left: Big statement */}
-          <div className="reveal" style={{ position: 'relative' }}>
-            <div className="glass-card-gradient" style={{ padding: '2.5rem', borderRadius: '24px' }}>
-              <div style={{
-                fontSize: 'clamp(3rem, 5vw, 5rem)',
-                fontFamily: 'var(--font-serif)',
-                fontWeight: 900,
-                lineHeight: 1,
-                background: 'var(--grad-brand)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                marginBottom: '1rem',
-              }}>
-                100%
-              </div>
-              <p style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
-                Honestly Organic
-              </p>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                Every ingredient is sourced from nature. We disclose exactly what goes in — no hidden fillers, no mysteries.
-              </p>
-              <div style={{
-                marginTop: '2rem',
-                paddingTop: '1.5rem',
-                borderTop: '1px solid rgba(255,255,255,0.06)',
-                display: 'flex',
-                gap: '2rem',
-              }}>
-                <div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--gold)' }}>10K+</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Happy Users</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--gold)' }}>4.9★</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Average Rating</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#A89880' }}>9</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Key Ingredients</div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Cinematic Model Banner */}
+        <div className="reveal" style={{ maxWidth: '800px', margin: '0 auto 5rem', borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <img 
+            src="/model-banner.png" 
+            alt="Floralock 100% Organic Shampoo"
+            style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+          />
+        </div>
 
-          {/* Right: Product image */}
-          <div className="reveal" style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+        {/* Stats Card */}
+        <div className="reveal" style={{ maxWidth: '800px', margin: '0 auto 4rem' }}>
+          <div className="glass-card-gradient" style={{ padding: '3rem', borderRadius: '24px', textAlign: 'center' }}>
             <div style={{
-              position: 'absolute',
-              inset: '10%',
-              background: 'radial-gradient(circle, rgba(201,151,58,0.1) 0%, transparent 70%)',
-              filter: 'blur(40px)',
-              borderRadius: '50%',
-            }} />
-            <img
-              src="/floralock-product.png"
-              alt="FloraLock Organic Shampoo"
-              className="animate-float-slow"
-              style={{
-                maxWidth: '280px',
-                width: '100%',
-                position: 'relative',
-                zIndex: 1,
-                filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))',
-              }}
-            />
+              fontSize: 'clamp(3rem, 5vw, 5rem)',
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 900,
+              lineHeight: 1,
+              background: 'var(--grad-brand)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              marginBottom: '1rem',
+            }}>
+              100%
+            </div>
+            <p style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
+              Honestly Organic
+            </p>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, maxWidth: '500px', margin: '0 auto' }}>
+              Every ingredient is sourced from nature. We disclose exactly what goes in — no hidden fillers, no mysteries.
+            </p>
+            <div style={{
+              marginTop: '2.5rem',
+              paddingTop: '2.5rem',
+              borderTop: '1px solid rgba(255,255,255,0.06)',
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '1.5rem',
+              flexWrap: 'wrap',
+            }}>
+              {[
+                { val: '10K+', label: 'Happy Users', color: 'var(--gold)' },
+                { val: '4.9★', label: 'Average Rating', color: 'var(--gold)' },
+                { val: '9', label: 'Key Ingredients', color: '#A89880' },
+              ].map(stat => (
+                <div key={stat.label} style={{
+                  background: '#0a0a0a',
+                  padding: '1.5rem 2.5rem',
+                  borderRadius: '20px',
+                  boxShadow: 'inset 6px 6px 12px rgba(0,0,0,0.8), inset -6px -6px 12px rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(0,0,0,1)',
+                  minWidth: '180px',
+                }}>
+                  <div style={{ fontSize: '1.75rem', fontWeight: 800, color: stat.color, marginBottom: '0.25rem' }}>{stat.val}</div>
+                  <div style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', fontWeight: 500 }}>{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Certification Pillars */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.25rem' }}>
+        {/* Certification Pillars (Neumorphic) */}
+        <div className="pillars-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem' }}>
           {pillars.map((p, i) => (
             <div
               key={p.title}
-              className="glass-card reveal"
+              className="reveal"
               style={{
-                padding: '1.75rem 1.5rem',
+                padding: '2rem 1.5rem',
                 textAlign: 'center',
                 transitionDelay: `${i * 100}ms`,
-                borderColor: p.border,
+                borderRadius: '24px',
+                background: '#0e0e0e',
+                boxShadow: '8px 8px 16px rgba(0,0,0,0.9), -8px -8px 16px rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.01)',
+                transition: 'transform 0.3s ease',
               }}
+              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-4px)'}
+              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
             >
               <div style={{
-                width: '56px',
-                height: '56px',
-                borderRadius: '16px',
-                background: p.color,
-                border: `1px solid ${p.border}`,
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                background: '#0e0e0e',
+                boxShadow: 'inset 4px 4px 8px rgba(0,0,0,0.8), inset -4px -4px 8px rgba(255,255,255,0.04)',
+                border: `1px solid rgba(255,255,255,0.02)`,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                margin: '0 auto 1rem',
+                margin: '0 auto 1.5rem',
                 fontSize: '1.5rem',
               }}>
                 {p.icon}
               </div>
-              <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text-primary)' }}>
                 {p.title}
               </h3>
-              <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
                 {p.desc}
               </p>
             </div>
@@ -174,11 +171,10 @@ const AboutSection = () => {
 
       <style>{`
         @media (max-width: 900px) {
-          #about .container > div:nth-child(2) { grid-template-columns: 1fr !important; }
-          #about .container > div:nth-child(3) { grid-template-columns: repeat(2, 1fr) !important; }
+          .pillars-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 500px) {
-          #about .container > div:nth-child(3) { grid-template-columns: 1fr 1fr !important; }
+          .pillars-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>

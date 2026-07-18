@@ -41,10 +41,42 @@ const BenefitsSection = () => {
   ];
 
   return (
-    <section id="benefits" className="section-py" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="orb orb-blue" style={{ width: '400px', height: '400px', bottom: '-100px', left: '-100px', opacity: 0.06 }} />
+    <section id="benefits" className="section-py" style={{ 
+      position: 'relative', 
+      overflow: 'hidden',
+      clipPath: 'inset(0)',
+      transform: 'translateZ(0)',
+    }}>
+      {/* Parallax Background Video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          objectFit: 'cover',
+          zIndex: -1,
+          opacity: 0.8,
+        }}
+      >
+        <source src="/broll2.mp4" type="video/mp4" />
+      </video>
 
-      <div className="container">
+      {/* Dark overlay for readability */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'linear-gradient(to bottom, var(--bg-deep) 0%, rgba(10,10,10,0.7) 15%, rgba(10,10,10,0.7) 85%, var(--bg-deep) 100%)',
+        zIndex: 0,
+        pointerEvents: 'none',
+      }} />
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {/* Header */}
         <div className="reveal" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 4rem' }}>
           <p className="section-label">Why FloraLock</p>

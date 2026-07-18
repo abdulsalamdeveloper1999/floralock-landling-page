@@ -44,6 +44,15 @@ const IngredientsSection = () => {
           </p>
         </div>
 
+        {/* Cinematic Ingredients Banner */}
+        <div className="reveal" style={{ maxWidth: '700px', margin: '0 auto 4rem', borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <img 
+            src="/ingredients-bottle.png" 
+            alt="Pure Organic Care For Your Hair"
+            style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+          />
+        </div>
+
         {/* Ingredient Grid */}
         <div style={{
           display: 'grid',

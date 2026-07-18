@@ -2,13 +2,14 @@ import React from 'react';
 
 const inputStyle = (hasError) => ({
   width: '100%',
-  padding: '0.875rem 1.1rem',
-  background: hasError ? 'rgba(239,68,68,0.06)' : 'rgba(255,255,255,0.04)',
-  border: `1px solid ${hasError ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.08)'}`,
-  borderRadius: '12px',
+  padding: '1rem 1.25rem',
+  background: '#0a0a0a',
+  border: `1px solid ${hasError ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.02)'}`,
+  boxShadow: 'inset 4px 4px 8px rgba(0,0,0,0.9), inset -4px -4px 8px rgba(255,255,255,0.04)',
+  borderRadius: '16px',
   color: 'var(--text-primary)',
   fontFamily: 'var(--font-sans)',
-  fontSize: '0.9rem',
+  fontSize: '0.95rem',
   outline: 'none',
   transition: 'all 0.2s',
   display: 'block',
@@ -62,17 +63,15 @@ const CartModal = ({
       onClick={(e) => { if (e.target === e.currentTarget) setShowCart(false); }}
     >
       <div style={{
-        background: 'rgba(11, 11, 26, 0.95)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: '24px',
-        boxShadow: '0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(201,151,58,0.05)',
+        background: '#0e0e0e',
+        border: '1px solid rgba(255,255,255,0.02)',
+        borderRadius: '28px',
+        boxShadow: '16px 16px 32px rgba(0,0,0,0.95), -16px -16px 32px rgba(255,255,255,0.03)',
         width: '100%',
         maxWidth: '480px',
         maxHeight: '90vh',
         overflowY: 'auto',
-        padding: '2rem',
+        padding: '2.5rem',
         position: 'relative',
       }}>
         {/* Close button */}
@@ -161,11 +160,12 @@ const CartModal = ({
 
             {/* Cart items */}
             <div style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.06)',
-              borderRadius: '16px',
+              background: '#0a0a0a',
+              boxShadow: 'inset 6px 6px 12px rgba(0,0,0,0.8), inset -6px -6px 12px rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.02)',
+              borderRadius: '20px',
               overflow: 'hidden',
-              marginBottom: '1.5rem',
+              marginBottom: '1.75rem',
             }}>
               {cartItems.length > 0 ? (
                 <>

@@ -22,7 +22,7 @@ const ShopSection = ({
 
       <div className="container">
         {/* Header */}
-        <div className="reveal" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 4rem' }}>
+        <div style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 4rem' }}>
           <p className="section-label">Get Yours</p>
           <h2 style={{
             fontFamily: 'var(--font-serif)',
@@ -47,47 +47,39 @@ const ShopSection = ({
         </div>
 
         {/* Product Card */}
-        <div className="reveal" style={{ maxWidth: '960px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '960px', margin: '0 auto' }}>
           <div className="glass-card-gradient" style={{
             borderRadius: '28px',
             overflow: 'hidden',
+            transform: 'translateZ(0)',
           }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              minHeight: '520px',
-            }}>
-              {/* Left: Product Visual */}
-              <div style={{
-                background: 'linear-gradient(135deg, rgba(201,151,58,0.04) 0%, rgba(107,124,61,0.15) 100%)',
-                borderRight: '1px solid rgba(255,255,255,0.06)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '3rem 2rem',
-                position: 'relative',
-              }}>
-                {/* Glow effect */}
+            <div className="shop-grid">
+              {/* Left: Product Visual (Cinematic Video) */}
+              <div className="shop-video-col">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                >
+                  <source src="/broll3.mp4" type="video/mp4" />
+                </video>
+
+                {/* Gradient blend to bridge seamlessly with the dark right panel */}
                 <div style={{
                   position: 'absolute',
-                  inset: '20%',
-                  background: 'radial-gradient(circle, rgba(201,151,58,0.06) 0%, transparent 70%)',
-                  filter: 'blur(30px)',
-                  borderRadius: '50%',
+                  inset: 0,
+                  background: 'linear-gradient(to right, transparent 70%, rgba(15,15,15,0.8) 100%)',
+                  pointerEvents: 'none',
                 }} />
-
-                <img
-                  src="/floralock-product.png"
-                  alt="FloraLock Organic Shampoo"
-                  className="animate-float"
-                  style={{
-                    maxWidth: '260px',
-                    width: '100%',
-                    position: 'relative',
-                    zIndex: 1,
-                    filter: 'drop-shadow(0 30px 50px rgba(0,0,0,0.5)) drop-shadow(0 0 30px rgba(201,151,58,0.07))',
-                  }}
-                />
 
                 {/* Tag */}
                 <div style={{
@@ -95,21 +87,23 @@ const ShopSection = ({
                   top: '1.5rem',
                   left: '1.5rem',
                   padding: '0.4rem 0.875rem',
-                  background: 'rgba(201,151,58,0.07)',
+                  background: 'rgba(201,151,58,0.15)',
                   border: '1px solid rgba(201,151,58,0.3)',
+                  backdropFilter: 'blur(8px)',
                   borderRadius: '100px',
                   fontSize: '0.72rem',
                   fontWeight: 700,
-                  color: 'var(--gold)',
+                  color: 'var(--gold-light)',
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
+                  zIndex: 2,
                 }}>
                   🌿 Organic
                 </div>
               </div>
 
               {/* Right: Purchase Info */}
-              <div style={{ padding: '3rem 2.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div className="shop-details-col">
                 {/* Product name */}
                 <p className="section-label" style={{ marginBottom: '0.5rem' }}>FloraLock™</p>
                 <h3 style={{
@@ -155,7 +149,7 @@ const ShopSection = ({
                     fontSize: '1rem',
                     color: 'var(--text-muted)',
                     textDecoration: 'line-through',
-                  }}>PKR 1,800</span>
+                  }}>PKR 1,500</span>
                   <span style={{
                     marginLeft: '0.5rem',
                     padding: '0.15rem 0.5rem',
@@ -274,9 +268,44 @@ const ShopSection = ({
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
-          #shop .container > div:last-child > div > div > div {
+        .shop-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          min-height: 520px;
+        }
+        .shop-video-col {
+          border-right: 1px solid rgba(255,255,255,0.06);
+          position: relative;
+          overflow: hidden;
+          display: flex;
+        }
+        .shop-details-col {
+          padding: 3rem 2.5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        @media (max-width: 900px) {
+          .shop-grid {
             grid-template-columns: 1fr !important;
+          }
+          .shop-video-col {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            min-height: 350px;
+          }
+          .shop-details-col {
+            padding: 2.5rem 2rem !important;
+          }
+        }
+        
+        @media (max-width: 500px) {
+          .shop-details-col {
+            padding: 2rem 1.25rem !important;
+          }
+          .shop-video-col {
+            min-height: 280px;
           }
         }
         input[type=number]::-webkit-outer-spin-button,
